@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Q
 //Q1. BinaryGap
 int solution1(int N)
 {

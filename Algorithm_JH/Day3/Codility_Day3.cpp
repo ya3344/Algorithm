@@ -9,6 +9,38 @@
 using namespace std;
 
 /*
+Lesson5: MinAvgTwoSlice
+Find the minimal average of any slice containing at least two elements.
+*/
+int MinAvgTwoSlice(vector<int> &A)
+{
+	float minNum = 100001;
+	int min_StartPos = 0;
+	size_t size = A.size();
+
+	for (size_t i = 0; i < size - 2; i++)
+	{
+		if (minNum >(A[i] + A[i + 1]) / 2.f)
+		{
+			minNum = (A[i] + A[i + 1]) / 2.f;
+			min_StartPos = i;
+		}
+		if (minNum > (A[i] + A[i + 1] + A[i + 2]) / 3.f)
+		{
+			minNum = (A[i] + A[i + 1] + A[i + 2]) / 3.f;
+			min_StartPos = i;
+		}
+	}
+
+	if (minNum > (A[size - 2] + A[size - 1]) / 2.f)
+	{
+		min_StartPos = size - 2;
+	}
+
+	return min_StartPos;
+}
+
+/*
 Lesson6: MaxproductOfThree
 Maximize A[P] * A[Q] * A[R] for any triplet (P, Q, R).
 */

@@ -3,11 +3,8 @@
 
 using namespace std;
 
-//1. BinaryGap
-//Find longest sequence of zeros in binary representation of an integer.
-
-int solution(int N) {
-	// write your code in C++14 (g++ 6.2.0)
+// 문제 1. BinaryGap
+int solution1(int N) {
 
 	int		countSrc = 0;
 	int		countDst = 0;
@@ -55,9 +52,8 @@ int solution(int N) {
 
 void main()
 {
-	
+	// 문제 1. BinaryGap
+	cout << solution1(20) << endl;
 
-	//1. BinaryGap
-	//Find longest sequence of zeros in binary representation of an integer.
-	cout << solution(20) << endl;
+
 }

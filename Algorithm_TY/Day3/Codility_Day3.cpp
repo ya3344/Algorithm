@@ -67,7 +67,6 @@ int solution(vector<int> &A)
 }
 
 
-
 //Lesson7
 // #1. Fish
 int solution(vector<int>& A, vector<int>& B)
@@ -98,21 +97,17 @@ int solution(vector<int>& A, vector<int>& B)
 	return route.size();
 }
 
-// #2. StoneWall	//57%
+// #2. StoneWall	
 int solution(vector<int> &H)
 {
 	stack<int> parts;
-	stack<int> compare;
+	size_t count = 0;
+
+	parts.push(H[0]);
+	++count;
 
 	for (int height : H)
 	{
-		if (true == parts.empty())
-		{
-			parts.push(height);
-			compare.push(height);
-			continue;
-		}
-
 		// 이전의 높이와 같은 경우
 		if (parts.top() == height)
 		{
@@ -120,45 +115,43 @@ int solution(vector<int> &H)
 		} // 이전의 높이보다 큰 경우
 		else if (parts.top() < height)
 		{
-			compare.push(height);
 			parts.push(height);
+			++count;
 			continue;
 		} // 이전의 높이보다 낮은 경우
 		else if (parts.top() > height)
 		{
-			compare.pop();
 			while (1)
 			{
-				if (true == compare.empty())
+				parts.pop();
+
+				if (true == parts.empty())
 				{
 					parts.push(height);
-					compare.push(height);
+					++count;
 					break;
 				}
 
-				if (compare.top() > height)
-				{
-					compare.pop();
-					//continue;
-				}
-				else if (compare.top() == height)
+				if (parts.top() == height)
 				{
 					break;
 				}
-				else if (compare.top() < height)
+				else if (parts.top() < height)
 				{
 					parts.push(height);
-					compare.push(height);
+					++count;
 					break;
+				} 
+				else if (parts.top() > height)
+				{
+					continue;
 				}
 			}
 		}
 	}
 
-	return parts.size();
+	return count;
 }
-
-
 
 //Lesson8
 // #1. EquiLeader

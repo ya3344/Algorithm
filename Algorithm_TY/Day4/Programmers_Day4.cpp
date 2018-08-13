@@ -104,20 +104,25 @@ bool IsPalindrom(string & sub, bool bEven, size_t init, size_t num)
 
 
 // #4. Lv3. °Å½º¸§µ·
-int GetMoney(int sum, vector<int>* moneyStack);
+int GetMoney(int sum, int* moneyArr, int size);
 
 int solution(int n, vector<int> money) {
 
-	//sort(money.begin(), money.end(), less<int>());
 	int sum = n;
+	int size = money.size();
 
-	return GetMoney(sum, &money);
+	int* arr = new int[size];
+
+	for (size_t i = 0; i < size; ++i)
+	{
+		arr[i] = money[i];
+	}
+
+	return GetMoney(sum, arr, size);
 }
 
-int GetMoney(int sum, vector<int>* moneyVec)
+int GetMoney(int sum, int* moneyArr, int size)
 {
-	vector<int> tmpVec = *moneyVec;
-
 	if (0 == sum)
 	{
 		return 1;
@@ -125,17 +130,19 @@ int GetMoney(int sum, vector<int>* moneyVec)
 	else if (0 > sum)
 		return 0;
 
-	if (0 == tmpVec.size())
+	if (0 == size)
 		return 0;
 
-	int top = *(--tmpVec.end());
+	int top = moneyArr[size - 1];
 	int quotient = sum / top;
 
-	tmpVec.pop_back();
+	int* tmpArr = new int[size - 1];
+	memcpy(tmpArr, moneyArr, sizeof(int) * (size - 1));
+
 	int count = 0;
 	for (size_t i = 0; i <= quotient; ++i)
 	{
-		count += GetMoney(sum - top*i, &tmpVec);
+		count += GetMoney(sum - top*i, tmpArr, size - 1);
 	}
 	return count;
 }

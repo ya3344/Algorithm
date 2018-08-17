@@ -90,13 +90,6 @@ int MaxNonoverlappingSegments(vector<int> &A, vector<int> &B)
 	return iResult;
 }
 
-//Lesson 13. FibFrog
-int FibFrog(vector<int> &A)
-{
-
-	return 0;
-}
-
 /*
 최대 구간합의 최소값은 배열 내 가장 큰 원소의 값이고
 최대 구간합의 최대값은 배열 내 모든 원소의 합이다
@@ -145,23 +138,81 @@ int binarySearch(vector<int> &A, int x)
 	return result;
 }
 
+//K -> 나누는 묶음 수, M -> 최댓값
 int MinMaxDivision(int K, int M, vector<int> &A)
 {
+	int iResult = 0;
+	//sort(A.begin(), A.end());
+	
+	iResult = binarySearch(A, K);
 
 
-	return 0;
+
+	return iResult;
 }
+
+
+//Lesson 13. FibFrog
+int Fibonacci(int n)
+{
+	if (n <= 1)
+		return n;
+
+	return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+
+void Fibonacci2(int n, vector<int> &Fibo)
+{
+	Fibo.push_back(0);
+	Fibo.push_back(1);
+
+	//for (int i = 2; i < n + 1; i++)
+	//{
+	//	Fibo.push_back(Fibo[i - 1] + Fibo[i - 2]);
+	//}
+
+	int i = 2;
+	while (1)
+	{
+		if (Fibo[i - 1] + Fibo[i - 2] >= n)
+			break;
+		Fibo.push_back(Fibo[i - 1] + Fibo[i - 2]);
+		i++;
+	}
+
+}
+
+int FibFrog(vector<int> &A)
+{
+	int iResult = 0;
+	int iSize = A.size();
+	vector<int> B = {};
+	Fibonacci2(iSize, B);
+	int iBSize = B.size();
+
+	int iCurrPoint = 0;
+
+
+	while (1)
+	{
+
+
+
+	}
+
+
+	return iResult;
+}
+
 
 void main()
 {
-	vector<int> A = { 2,1,5,1,2,2,2 };
-	int K = 3;
-	int M = 5;
+	vector<int> A = { 0,0,0,1,1,0,1,0,0,0,0 };
+
 	int iResult = 0;
 
-	iResult = MinMaxDivision(K, M, A);
+	iResult = FibFrog(A);
 
-	iResult = binarySearch(A, K);
 	cout << iResult << endl;
 
 	system("Pause");

@@ -131,7 +131,7 @@ int solution(vector<int> &A, vector<int> &B)
 		LINE TopLine = lineStack.top();
 		LINE curLine(A[i], B[i]);
 
-		// ÇöÀç ¶óÀÎÀÌ ¹Û¿¡ ÀÖ´Â °æ¿ì
+		// í˜„ì¬ ë¼ì¸ì´ ë°–ì— ìˆëŠ” ê²½ìš°
 		if (TopLine.end < curLine.init)
 		{
 			lineStack.emplace(curLine);
@@ -146,19 +146,36 @@ int solution(vector<int> &A)
 {
 	int sum = 0;
 
-	size_t inputSize = A.size();
+	int inputSize = A.size();
 	if (1 == inputSize)
 		return A[0];
 
 	sum += A[0];
-	sum += A[inputSize - 1];
-	for (size_t i = 1; i < inputSize - 1; ++i)
+	
+	int maxNum = 0;
+	int maxIdx = 0;
+	for (int i = 1; i < inputSize - 1; ++i)
 	{
-		if (A[i] > 0)
-			sum += A[i];
+		maxNum = A[i];
+		maxIdx = i;
+
+		int endIdx = i + 6;
+		if (endIdx > inputSize - 1)
+			endIdx = inputSize - 1;
+
+		for (int j = i; j < endIdx; ++j)
+		{
+			if (maxNum < A[j])
+			{
+				maxNum = A[j];
+				maxIdx = j;
+			}
+		}
+		i = endIdx;
+		sum += maxNum;
 	}
 
-	return sum;
+	return sum + A[inputSize-1];
 }
 
 
